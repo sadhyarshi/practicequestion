@@ -1,0 +1,45 @@
+
+import java.util.*;
+
+class Solution {
+	public static void coinchangehelp(int[] coins,int amtsf,int tamt,String asf,boolean[] used){
+		if(amtsf>tamt){
+			return;
+		}
+		else if(amtsf==tamt){
+			//System.out.print("ans");
+			System.out.println(asf);
+			return;
+		}
+		for(int i=0;i<coins.length;i++){
+			if(used[i]==false){
+				used[i]=true;
+			//	System.out.println("coinchangehelp"+amtsf+tamt);
+				coinchangehelp(coins,amtsf+coins[i],tamt,asf+coins[i]+" ",used);
+				used[i]=false;
+			}
+		}
+	}
+    public static void coinChange(int[] coins, int amt){
+        //Write your code here
+		boolean used[]=new boolean[coins.length];
+			//System.out.println("ans");
+		coinchangehelp(coins,0,amt,"",used);
+	//	System.out.println("ans");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] coins = new int[n];
+        for (int i = 0; i < n; i++) {
+            coins[i] = sc.nextInt();
+        }
+        int amt = sc.nextInt();
+
+        Solution Obj = new Solution();
+        Obj.coinChange(coins, amt);
+    }
+}
